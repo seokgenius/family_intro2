@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'screens/detail_1.dart';
+import 'screens/detail_2.dart';
+import 'screens/detail_3.dart';
+import 'screens/detail_4.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,21 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Family Intro',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -39,15 +28,6 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -55,14 +35,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // int _counter = 0;
-  //
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -72,7 +44,15 @@ class _MyHomePageState extends State<MyHomePage> {
       backgroundColor: Colors.pink,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(
+            "Family Intro",
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Dongle',
+              color: Colors.white,
+            ),
+        ),
       ),
       body: Center(
         child: Column(
@@ -80,12 +60,19 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             // 가족 사진 영역
             Container(
+              padding: const EdgeInsets.only(top: 10),
               width: double.infinity,
               color: Colors.orange,
               child: Column(
                 children: [
-                  Image.network("https://loremflickr.com/320/240/dog"),
-                  const Text('가족사진입니다',
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.redAccent, width: 5),
+                        borderRadius: BorderRadius.circular(4)
+                    ),
+                    child: Image.network("https://loremflickr.com/320/240/dog", height: 150,),
+                  ),
+                  const Text('가족사진',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w700,
@@ -103,16 +90,113 @@ class _MyHomePageState extends State<MyHomePage> {
               margin: const EdgeInsets.only(top: 10),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.network("https://loremflickr.com/320/240/paris,girl/all", width: imageWidth, height: 100),
-                      Image.network("https://loremflickr.com/320/240/paris,girl/all", width: imageWidth, height: 100),
-                      Image.network("https://loremflickr.com/320/240/paris,girl/all", width: imageWidth, height: 100),
-                      Image.network("https://loremflickr.com/320/240/paris,girl/all", width: imageWidth, height: 100),
-                    ],
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Hero(
+                          tag: 'first-family',
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.green, width: 5),
+                                borderRadius: BorderRadius.circular(4)
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => FirstDetail())
+                                );
+                              },
+                              icon: Image.network("https://loremflickr.com/320/240/paris,girl/all"),
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(
+                                  maxWidth: deviceWidth / 2 - 20
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Hero(
+                            tag: 'second-family',
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.green, width: 5),
+                                  borderRadius: BorderRadius.circular(4)
+                              ),
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => SecondDetail())
+                                  );
+                                },
+                                icon: Image.network("https://loremflickr.com/320/240/paris,girl/all"),
+                                padding: EdgeInsets.zero,
+                                constraints: BoxConstraints(
+                                    maxWidth: deviceWidth / 2 - 20
+                                ),
+                              ),
+                            ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const Text('구성원별 개인사진입니다.',
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Hero(
+                          tag: 'third-family',
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.green, width: 5),
+                                borderRadius: BorderRadius.circular(4)
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => ThirdDetail())
+                                );
+                              },
+                              icon: Image.network("https://loremflickr.com/320/240/paris,girl/all"),
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(
+                                  maxWidth: deviceWidth / 2 - 20
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Hero(
+                          tag: 'fourth-family',
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.green, width: 5),
+                                borderRadius: BorderRadius.circular(4)
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => FourthDetail())
+                                );
+                              },
+                              icon: Image.network("https://loremflickr.com/320/240/paris,girl/all"),
+                              padding: EdgeInsets.zero,
+                              constraints: BoxConstraints(
+                                  maxWidth: deviceWidth / 2 - 20
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const Text('구성원별 개인사진 (클릭시 상세)',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w400,
@@ -134,10 +218,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   // 사진 영역 (+ 내부 텍스트)
                   Stack(
                     children: [
-                      Image.network("https://picsum.photos/id/237/200/300"),
+                      Image.network("https://picsum.photos/id/237/200/300", height: 150),
                       Positioned(
-                        right: 20,
-                        top: 30,
+                        right: 15,
+                        bottom: 10,
                         child: Text('반려동물',
                           style: TextStyle(
                             fontSize: 25,
@@ -165,26 +249,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               )
             )
-
-
           ],
-
-          // children: <Widget>[
-          //   const Text(
-          //     'You have pushed the button this many times:',
-          //   ),
-          //   Text(
-          //     '$_counter',
-          //     style: Theme.of(context).textTheme.headlineMedium,
-          //   ),
-          // ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
